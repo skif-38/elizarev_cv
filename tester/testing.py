@@ -1,7 +1,7 @@
 import sys
 sys.path.append("../src")
 
-from match_demo import add, add_with_bug
+from match_demo import (add, add_with_bug, calculate_tax_with_bug)
 
 def test_addition():
     assert add(1, 3) == 4
@@ -29,8 +29,27 @@ def test_addition_reasonable():
     assert add(-6, -7) == -13
     assert add(6, -7) == -1
 
+def test_addition_commutative():
+    # can be in previous test but logically separated
+    assert add(7, -6) == 1
+    assert add(-6, 7) == 1
+    print("Test ADDITION is COMMUNITATIVE PASSED")
+
+def test_tax_calculation():
+    assert calculate_tax_with_bug(1000) == 150.0
+    assert calculate_tax_with_bug(100) == 15.0
+    assert calculate_tax_with_bug(10) == 1.5
+    assert calculate_tax_with_bug(1) == 0.15
+    assert calculate_tax_with_bug(243) == 1.5
+
+if __name__ == "__main__":
+    test_addition()
+    test_addition_with_bug()
+
+
 if __name__ == "__main__":
     test_addition_reasonable()
     test_addition_overcomplicated()
     test_addition()
     test_addition_with_bug()
+    test_tax_calculation()
